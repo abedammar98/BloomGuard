@@ -1,0 +1,37 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .75rem 1.5rem;
+  /* use global theme colors */
+  background: linear-gradient(90deg, var(--secondary), var(--primary));
+  color: #fff;
+  box-shadow: var(--shadow);
+}
+
+
+.nav-logo {
+  font-size: 1.25rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  text-decoration: none;
+  color: #fff;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.nav-link {
+  text-decoration: none;
+  font-weight: 600;
+  color: #fff;
+  transition: opacity .2s ease;
+}
+.nav-link:hover { opacity: .8; }

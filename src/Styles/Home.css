@@ -1,0 +1,254 @@
+/* 🔄 Reset & Base Styles (moved from index.css) */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  background-color: #242424; /* fallback dark bg */
+  color: rgba(255, 255, 255, 0.87);
+}
+
+/* Make root stretch full viewport */
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* --- Override Vite's centered body so the page can be full-width --- */
+body {
+  display: block;
+  min-height: 100vh;
+}
+
+/* Ensure the React root can stretch */
+#root {
+  width: 100%;
+}
+
+/* Page layout: full-height column, navbar on top, content fills */
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Main content should take remaining space below the navbar */
+.page main {
+  flex: 1;
+}
+
+/* Make sure navbar spans the viewport width */
+.navbar {
+  width: 100%;
+}
+
+
+/* Responsive base layout for Home page */
+
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.home-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.home-subtitle {
+  font-size: clamp(1rem, 3vw, 1.5rem);
+  max-width: 600px;
+  text-align: center;
+  color: #555;
+}
+
+/* 🌊 Navbar Styles */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: linear-gradient(90deg, #3ba7db, #4caf50);
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;   /* 🔥 removes the bullets */
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-links li a {
+  color: white;       /* 🔥 fixes blue default */
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.navbar-links li a:hover {
+  color: #dfffd6;
+}
+
+/* Responsive collapse */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar-links {
+    flex-direction: column;
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  .navbar-links li {
+    padding: 0.5rem 0;
+  }
+}
+
+/* === THEME (unified across pages) =============================== */
+:root {
+  --bg: #0f1b2b;            /* deep lake */
+  --fg: #e8f6ff;            /* light text */
+  --primary: #47b3ff;       /* lake blue */
+  --secondary: #43c463;     /* leaf green */
+  --muted: #9fb3c8;         /* subtle text */
+  --card: #13263c;          /* panels */
+  --shadow: 0 10px 30px rgba(0,0,0,.25);
+}
+
+body {
+  background:
+    radial-gradient(1200px 600px at 10% 0%, rgba(71,179,255,0.15), transparent 60%),
+    radial-gradient(900px 500px at 90% 10%, rgba(67,196,99,0.18), transparent 60%),
+    linear-gradient(180deg, var(--bg), #0b1522 60%);
+  color: var(--fg);
+}
+
+/* unify links */
+a { color: var(--fg); text-decoration: none; }
+a:hover { color: #dfffd6; }
+
+/* === HERO SECTION =============================================== */
+.hero {
+  position: relative;
+  padding: clamp(3rem, 6vw, 6rem) 2rem;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.hero::before,
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: -10%;
+  pointer-events: none;
+  background-repeat: no-repeat;
+}
+
+.hero::before {
+  background-image:
+    radial-gradient(40rem 20rem at 20% 80%, rgba(71,179,255,0.12), transparent 60%),
+    radial-gradient(35rem 18rem at 80% 60%, rgba(67,196,99,0.12), transparent 60%);
+  filter: blur(2px);
+}
+
+.hero-inner {
+  width: min(1100px, 92vw);
+  display: grid;
+  gap: 1.25rem;
+}
+
+.hero-kicker {
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+  font-size: .9rem;
+}
+
+.hero-title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.1;
+  font-weight: 800;
+}
+
+.hero-subtitle {
+  color: var(--muted);
+  max-width: 62ch;
+  font-size: clamp(1rem, 2.2vw, 1.2rem);
+}
+
+.hero-actions {
+  display: flex;
+  gap: .75rem;
+  flex-wrap: wrap;
+  margin-top: .25rem;
+}
+
+/* Buttons (reusable across pages) */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .8rem 1.1rem;
+  border-radius: .8rem;
+  border: 1px solid transparent;
+  font-weight: 600;
+  box-shadow: var(--shadow);
+  transition: transform .08s ease, filter .2s ease, background .2s ease, border-color .2s ease;
+  will-change: transform, filter;
+}
+.btn:hover { transform: translateY(-1px); filter: brightness(1.05); }
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary), #6bd1ff);
+  color: #00121e;
+}
+.btn-primary:focus-visible { outline: 3px solid rgba(71,179,255,.5); }
+
+.btn-secondary {
+  background: linear-gradient(135deg, var(--secondary), #7be29a);
+  color: #00180a;
+}
+.btn-secondary:focus-visible { outline: 3px solid rgba(67,196,99,.5); }
+
+/* Cards / sections (shared pattern for later pages) */
+.section {
+  width: min(1100px, 92vw);
+  margin: 2rem auto;
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 1rem;
+  box-shadow: var(--shadow);
+  padding: 1.25rem;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .hero { padding-top: 5rem; } /* extra room if navbar stacks */
+}

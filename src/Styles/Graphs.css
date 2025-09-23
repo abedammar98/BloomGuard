@@ -1,0 +1,155 @@
+/* ========= Graphs.css (themed) ========= */
+
+.graphs-page {
+  /* pull vars from :root in Home.css */
+  --card-bg: var(--card);
+  --text: var(--fg);
+  --muted: var(--muted);
+  --line: rgba(255,255,255,.08);
+  --shadow: var(--shadow);
+  color: var(--text);
+}
+
+/* Header under navbar */
+.graphs-header {
+  padding: 24px 20px 10px;
+}
+.graphs-header h1 {
+  margin: 0 0 12px 0;
+  font-size: 24px;
+  font-weight: 800;
+  color: #ffffff;                 /* stay visible on dark header */
+  text-shadow: 0 1px 2px rgba(0,0,0,.25);
+}
+
+/* KPIs */
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(160px, 1fr));
+  gap: 12px;
+}
+.kpi {
+  background: var(--card-bg);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 14px 16px;
+  box-shadow: var(--shadow);
+}
+.kpi-title {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.kpi-value {
+  font-size: 20px;
+  font-weight: 700;
+}
+.kpi-value.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 14px;
+  background: rgba(71,179,255,.16); /* soft blue pill */
+  color: var(--fg);
+}
+
+/* Card */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  margin: 16px 20px;
+  box-shadow: var(--shadow);
+}
+
+/* Card header */
+.card-header {
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+}
+.card-header h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+.chip-row .chip {
+  color: #06131f;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  margin-left: 8px;
+  border: 1px solid rgba(0,0,0,0.06);
+  background: #bff7cf; /* default demo chip bg; your bands are drawn in the chart */
+}
+
+/* Chart area */
+.chart-wrap {
+  padding: 8px 10px 8px;
+  height: 360px;
+}
+.loading, .error {
+  padding: 18px 16px 24px;
+  color: var(--muted);
+}
+
+/* Hover details panel */
+.hover-panel {
+  border-top: 1px solid var(--line);
+  padding: 12px 16px 16px;
+  background: rgba(255,255,255,.03);   /* subtle translucent layer */
+  border-bottom-left-radius: 14px;
+  border-bottom-right-radius: 14px;
+}
+.hover-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  gap: 12px;
+}
+.hover-left { display: flex; gap: 14px; align-items: center; }
+.hover-date { margin-right: 12px; }
+
+.zone-badge {
+  color: #00121e;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 12px;
+  border: 1px solid rgba(0,0,0,0.06);
+  background: rgba(255,255,255,.9);
+}
+
+/* Driver chips row */
+.hover-drivers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+  font-size: 14px;
+  margin: 6px 0 8px;
+}
+.driver-chip { white-space: nowrap; }
+.driver-name { margin-right: 4px; }
+
+/* Message box */
+.hover-msg {
+  font-size: 13px;
+  color: var(--fg);
+  background: var(--card-bg);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 12px;
+  white-space: pre-wrap;
+}
+
+/* Recharts tooltip polish */
+.recharts-default-tooltip {
+  border-radius: 10px !important;
+  border: 1px solid var(--line) !important;
+  box-shadow: var(--shadow) !important;
+  background: rgba(10,19,32,.96) !important;
+  color: var(--fg) !important;
+}

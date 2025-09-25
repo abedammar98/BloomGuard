@@ -2,6 +2,7 @@ import "./Styles/About.css";
 import Navbar from "./Components/Navbar";
 import abed from "./abed.jpg";
 import Basel from "./Basel.jpg";
+import Adam from "./Adam.png";
 
 export default function About() {
   return (
@@ -53,7 +54,7 @@ export default function About() {
           <TeamCard
             name="Adam Hasarmi"
             role="Frontend & UX"
-            img="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop"
+            img={Adam}
             bio="Owns the React dashboard, charts, and interaction design."
             links={{ github: "#", linkedin: "#" }}
           />

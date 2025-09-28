@@ -1,3 +1,5 @@
+// Graphs.jsx — updated to include PC1 + risk_prob
+
 import { useEffect, useMemo, useState } from "react";
 import "./Styles/Graphs.css";
 import Navbar from "./Components/Navbar";
@@ -44,16 +46,18 @@ const PRETTY = {
   nitrate_mgL: "Nitrate (mg/L)",
   nitrite_mgL: "Nitrite (mg/L)",
   turbidity_NTU: "Turbidity (NTU)",
+  PC1: "PC1 (drivers mix)",
+  risk_prob: "Risk Prob. (Pr[Yellow/Red])",
 };
 
 const ZONE_COLOR = { green: "#2ecc71", yellow: "#f1c40f", red: "#e74c3c" };
 const BAND_COLOR = { green: "#d9f7d9", yellow: "#fff3bf", red: "#ffd6d6" };
 
 /* ---------- helpers ---------- */
-function fmt(v) {
+function fmt(v, digits = 3) {
   if (v == null || Number.isNaN(v)) return "—";
   const n = Number(v);
-  return Number.isFinite(n) ? n.toFixed(3) : String(v);
+  return Number.isFinite(n) ? n.toFixed(digits) : String(v);
 }
 function zoneMessage(row) {
   if (!row) return "";
@@ -106,6 +110,9 @@ function useAdvisory() {
             CDI: r.CDI == null ? null : Number(r.CDI),
             zone: String(r.zone || "").toLowerCase(),
             flagged_drivers: Array.isArray(r.flagged_drivers) ? r.flagged_drivers : [],
+            // NEW fields from updated notebook:
+            PC1: r.PC1 == null ? null : Number(r.PC1),
+            risk_prob: r.risk_prob == null ? null : Number(r.risk_prob),
           };
           DRIVER_COLS.forEach((k) => {
             rec[k] = r[k] == null ? null : Number(r[k]);
@@ -197,10 +204,24 @@ export default function Graphs() {
     if (!nums.length) return [0, 1];
     const min = Math.min(...nums);
     const max = Math.max(...nums);
-    // pad a bit so the line doesn’t touch the edges
     const pad = (max - min) * 0.08 || 0.5;
     return [Math.floor(min - pad), Math.ceil(max + pad)];
   }, [driverSeries]);
+
+  // risk probability series (0–1)
+  const riskSeries = useMemo(() => {
+    if (!chartData.length) return [];
+    return chartData.map((r) => ({
+      dateLabel: r.dateLabel,
+      risk: r.risk_prob == null ? null : Number(r.risk_prob),
+    }));
+  }, [chartData]);
+
+  const latestRisk = useMemo(() => {
+    if (!chartData.length) return null;
+    const v = chartData[chartData.length - 1]?.risk_prob;
+    return typeof v === "number" ? v : null;
+  }, [chartData]);
 
   return (
     <div className="graphs-page">
@@ -363,6 +384,47 @@ export default function Graphs() {
           )}
         </div>
       </div>
+
+      {/* ===================== Risk Probability chart (0–1) ===================== */}
+      <div className="card">
+        <div className="card-header">
+          <h2>{PRETTY.risk_prob}</h2>
+          <div className="kpis" style={{ gridTemplateColumns: "repeat(1, minmax(160px, 1fr))" }}>
+            <KPI
+              title="Latest Risk Prob."
+              value={latestRisk != null ? `${fmt(latestRisk, 2)}` : "—"}
+              badge
+            />
+          </div>
+        </div>
+
+        <div className="chart-wrap">
+          {loading ? (
+            <div className="loading">Loading chart…</div>
+          ) : err ? (
+            <div className="error">Error: {err}</div>
+          ) : (
+            <ResponsiveContainer width="100%" height={260}>
+              <LineChart data={riskSeries} margin={{ top: 10, right: 24, bottom: 10, left: 0 }}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="dateLabel" minTickGap={24} />
+                <YAxis domain={[0, 1]} />
+                <Tooltip
+                  labelFormatter={(label) => `Date: ${label}`}
+                  formatter={(v) => [fmt(v), PRETTY.risk_prob]}
+                />
+                <Line
+                  type="monotone"
+                  dataKey="risk"
+                  dot={false}
+                  strokeWidth={2}
+                  isAnimationActive={false}
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
@@ -383,6 +445,13 @@ function HoverPanel({ row }) {
           </div>
           <div>
             <b>CDI:</b> {fmt(row.CDI)}
+          </div>
+          {/* NEW: PC1 + Risk Prob inline */}
+          <div>
+            <b>{PRETTY.PC1}:</b> {fmt(row.PC1)}
+          </div>
+          <div>
+            <b>{PRETTY.risk_prob}:</b> {fmt(row.risk_prob, 2)}
           </div>
         </div>
         <div className="hover-right">

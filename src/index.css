@@ -1,0 +1,139 @@
+/* ==== Global Light Theme (calm palette) ==== */
+:root {
+  /* أساس محايد ومريح */
+  --bg: #f7fafc;
+  --fg: #0f172a; /* slate-900 */
+  --muted: #475569; /* slate-600 */
+  --card: #ffffff;
+
+  /* ألوان رئيسية أقل تشبّعًا */
+  --primary: #3a7bd5; /* أزرق هادئ */
+  --primary-2: #5aa0e6; /* طرف التدرّج */
+  --secondary: #22b37f; /* أخضر هادئ */
+
+  /* حدود/ظلال ناعمة */
+  --line: rgba(2, 6, 23, 0.06);
+  --shadow: 0 8px 22px rgba(2, 6, 23, 0.06);
+
+  /* زوايا وخاتم تركيز */
+  --radius: 14px;
+  --radius-sm: 10px;
+  --ring-color: rgba(58, 123, 213, 0.28);
+  --ring: 0 0 0 3px var(--ring-color);
+}
+
+/* Reset أساسي */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html,
+body,
+#root {
+  height: 100%;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+/* Typography & Base */
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Inter, Arial,
+    "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.page main {
+  flex: 1;
+}
+
+/* Links */
+a {
+  color: var(--primary);
+  text-decoration: none;
+  text-underline-offset: 3px;
+}
+a:hover {
+  color: #2f6bbd;
+} /* أغمق بدل تخفيض الشفافية */
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--fg);
+  box-shadow: var(--shadow);
+  transition: transform 0.08s ease, filter 0.2s ease, background 0.2s ease,
+    border-color 0.2s ease;
+}
+.btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.02);
+}
+.btn:active {
+  transform: translateY(0);
+  filter: brightness(0.98);
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary), var(--primary-2));
+  color: #fff;
+  border-color: transparent;
+}
+.btn-secondary {
+  background: linear-gradient(135deg, var(--secondary), #36c794);
+  color: #083a29;
+  border-color: transparent;
+}
+
+/* Badges */
+.badge-pill {
+  display: inline-block;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: #eef2ff;
+  color: #1e3a8a;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+/* Scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
+}
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #e5e7eb, #cbd5e1);
+  border-radius: 999px;
+}
+
+/* Focus Ring */
+:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
+}

@@ -1,134 +1,307 @@
+/* ─────────── Root & Variables ─────────── */
 .about-page {
-  --card-bg: var(--card);
   --text: var(--fg);
   --muted: var(--muted);
-  --line: rgba(255,255,255,.08);
-  --shadow: var(--shadow);
+  --card-bg: var(--card);
+  --line: rgba(2, 6, 23, 0.08);
+  --shadow: 0 10px 28px rgba(2, 6, 23, 0.07);
+  --ring: rgba(58, 123, 213, 0.28);
+
+  --accent: var(--primary);
+  --accent-2: var(--primary-2);
+
+  --space-1: 8px;
+  --space-2: 12px;
+  --space-3: 16px;
+  --space-4: 20px;
+  --space-5: 28px;
   color: var(--text);
 }
 
-/* Hero / Intro */
+/* ─────────── Layout Container ─────────── */
+.container {
+  width: min(1100px, 100%);
+  margin: 0 auto;
+  padding-inline: clamp(16px, 3.2vw, 24px);
+}
+
+/* كتلة نص لقراءة مثالية */
+.prose {
+  max-width: 70ch;
+  line-height: 1.7;
+  font-size: clamp(15.5px, 1.9vw, 17px);
+  color: var(--text);
+}
+
+/* ─────────── Section Header ─────────── */
+.section-header {
+  margin-bottom: var(--space-4);
+}
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 13px;
+  color: #2f6bbd;
+  background: rgba(58, 123, 213, 0.1);
+  border: 1px solid rgba(58, 123, 213, 0.18);
+  padding: 6px 10px;
+  border-radius: 999px;
+}
+.eyebrow svg {
+  width: 14px;
+  height: 14px;
+}
+.section-title {
+  margin: 10px 0 6px;
+  font-weight: 900;
+  letter-spacing: 0.2px;
+  font-size: clamp(28px, 4vw, 42px);
+  color: #0f172a;
+}
+.section-kicker {
+  margin: 0;
+  color: var(--muted);
+  max-width: 68ch;
+  font-size: 15px;
+}
+
+/* ─────────── Hero (ألوان هادئة + تدرج خلفية) ─────────── */
 .about-hero {
-  padding: 28px 20px 8px;
+  position: relative;
+  isolation: isolate;
+  padding: clamp(36px, 6vw, 64px) clamp(16px, 4vw, 32px);
+  background: radial-gradient(
+      900px 380px at 0% -10%,
+      rgba(58, 123, 213, 0.08),
+      transparent 60%
+    ),
+    radial-gradient(
+      700px 300px at 100% -10%,
+      rgba(34, 179, 127, 0.08),
+      transparent 65%
+    );
+  border-radius: 0 0 30px 30px;
 }
-.about-hero h1 {
-  margin: 0 0 10px 0;
-  font-size: 28px;
-  font-weight: 800;
-  color: #ffffff;
-  text-shadow: 0 1px 2px rgba(0,0,0,.25);
-}
-.about-hero .lead {
-  margin: 10px 0 8px;
-  color: var(--muted);
-}
-.about-hero .mission {
-  margin: 12px 0 10px;
-  background: var(--card-bg);
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  padding: 14px 16px;
-  box-shadow: var(--shadow);
-  color: var(--text);
-}
-.about-hero .bullets {
-  margin: 12px 0 2px 20px;
-  color: var(--muted);
-}
-.about-hero .bullets li { margin: 6px 0; }
 
-/* Team */
-.team-section {
-  margin: 18px 20px 24px;
-  background: var(--card-bg);
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  box-shadow: var(--shadow);
-  padding: 18px 16px 20px;
+/* عنوان الهيرو */
+.about-hero h1 {
+  font-size: clamp(32px, 4.8vw, 56px);
+  line-height: 1.08;
+  font-weight: 900;
+  letter-spacing: 0.2px;
+  margin-bottom: 8px;
+  background: linear-gradient(90deg, #0f172a, #1e3a8a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-wrap: balance;
 }
-.team-section h2 {
-  margin: 0 0 6px 0;
-  font-size: 22px;
-  font-weight: 800;
+
+/* الفقرة التمهيدية */
+.about-hero .lead {
+  max-width: 70ch;
+  font-size: clamp(15.5px, 1.9vw, 17px);
+  line-height: 1.75;
+  color: #4b5563;
+  margin: 10px 0 14px;
+}
+
+/* ─────────── Mission Card ─────────── */
+.mission-card {
+  margin: var(--space-4) 0 var(--space-3);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.96),
+    rgba(255, 255, 255, 0.92)
+  );
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  padding: clamp(18px, 3vw, 22px);
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 14px;
+}
+.mission-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #fff;
+  box-shadow: 0 10px 24px rgba(58, 123, 213, 0.25);
+}
+.mission-content b {
+  font-weight: 700;
+  color: #0f172a;
+}
+.mission-content b:first-child {
+  background: #eef4ff;
+  color: #204f98;
+  padding: 2px 6px;
+  border-radius: 8px;
+}
+
+/* ─────────── Bullets ─────────── */
+.bullets {
+  margin: var(--space-4) 0 var(--space-1);
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+  max-width: 68ch;
+}
+.bullets li {
+  position: relative;
+  padding-left: 28px;
+  line-height: 1.7;
+  color: var(--fg);
+}
+.bullets li::before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 0.9em;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #3b82f6;
+  border: 1px solid rgba(37, 99, 235, 0.25);
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
+}
+
+/* ─────────── Team Section ─────────── */
+.team-section {
+  margin: 28px 0 36px;
+}
+.team-wrap {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  padding: clamp(16px, 3vw, 22px);
+}
+.team-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.team-title {
+  margin: 0;
+  font-weight: 900;
+  font-size: clamp(20px, 2.6vw, 26px);
 }
 .team-sub {
-  margin: 0 0 14px 0;
+  margin: 6px 0 14px;
   color: var(--muted);
   font-size: 14px;
+}
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--line), transparent);
+  margin: 12px 0 18px;
 }
 
 .team-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(220px, 1fr));
-  gap: 16px;
+  gap: clamp(14px, 2.6vw, 20px);
 }
 @media (max-width: 980px) {
-  .team-grid { grid-template-columns: repeat(2, minmax(220px, 1fr)); }
+  .team-grid {
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+  }
 }
 @media (max-width: 640px) {
-  .team-grid { grid-template-columns: 1fr; }
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
-.team-card {
+.card {
   border: 1px solid var(--line);
-  border-radius: 14px;
-  padding: 16px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #ffffff, #fbfdff);
+  box-shadow: 0 10px 26px rgba(2, 6, 23, 0.06);
+  padding: 18px;
   text-align: center;
-  background: rgba(255,255,255,.03);   /* translucent so it sits in the dark theme */
-  box-shadow: var(--shadow);
+  transition: transform 0.16s ease, box-shadow 0.16s ease,
+    border-color 0.16s ease;
 }
-.avatar-wrap {
-  width: 120px;
-  height: 120px;
-  margin: 0 auto 10px;
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 38px rgba(2, 6, 23, 0.1);
+  border-color: rgba(58, 123, 213, 0.22);
+}
+
+/* أفاتار الفريق (fix نهائي) */
+.avatar {
+  width: 116px;
+  height: 116px;
   border-radius: 50%;
+  margin: 4px auto 10px;
   overflow: hidden;
-  border: 3px solid rgba(255,255,255,.18);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+  flex-shrink: 0;
+  border: 3px solid rgba(2, 6, 23, 0.06);
+  box-shadow: 0 8px 18px rgba(2, 6, 23, 0.08);
+  background: #edf3fb;
 }
-.avatar-wrap img {
+.avatar img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-.team-name {
-  font-weight: 800;
-  letter-spacing: .2px;
-}
-.team-role {
-  color: #a5d6ff; /* cooler accent against dark */
-  font-weight: 700;
-  margin: 2px 0 8px;
-  font-size: 14px;
-}
-.team-bio {
-  color: var(--muted);
-  font-size: 14px;
-  min-height: 44px;
+  object-position: center;
+  display: block;
 }
 
-.team-links {
+.name {
+  font-weight: 900;
+  font-size: 16px;
+  letter-spacing: 0.2px;
+}
+.role {
+  margin: 4px 0 10px;
+  font-weight: 800;
+  font-size: 13.5px;
+  color: #2f6bbd;
+}
+.bio {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.links {
   display: flex;
   gap: 10px;
   justify-content: center;
   margin-top: 10px;
 }
-.team-links a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 34px;
-  height: 34px;
+.links a {
+  width: 36px;
+  height: 36px;
   border-radius: 999px;
-  background: rgba(255,255,255,.1);
-  color: var(--fg);
-  border: 1px solid var(--line);
-  transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+  display: grid;
+  place-items: center;
+  color: #2f6bbd;
+  background: #eef4ff;
+  border: 1px solid rgba(58, 123, 213, 0.18);
+  transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease,
+    color 0.16s ease;
 }
-.team-links a:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 14px rgba(0,0,0,0.18);
-  background: rgba(255,255,255,.18);
+.links a:hover {
+  transform: translateY(-2px);
+  background: #e7f0ff;
+  color: #204f98;
+  box-shadow: 0 10px 22px rgba(58, 123, 213, 0.16);
+}
+.links a:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
 }
 
 .credit {
@@ -136,4 +309,162 @@
   text-align: center;
   color: var(--muted);
   font-size: 13px;
+}
+
+/* تقليل الحركة */
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .links a {
+    transition: none !important;
+  }
+}
+/* ===== Fix bullets duplication & layout (About only) ===== */
+.about-page .bullets {
+  max-width: 72ch;
+  margin: 16px 0 8px;
+  padding: 0;
+  list-style: none; /* لا نستخدم نقط المتصفح */
+  display: grid;
+  gap: 10px;
+}
+
+.about-page .bullets li {
+  display: grid; /* عمود للنقطة + عمود للنص */
+  grid-template-columns: 22px 1fr;
+  gap: 10px;
+  align-items: start;
+  color: var(--fg);
+  padding-left: 0; /* ألغِ الحشو القديم */
+}
+
+/* ألغِ أي مؤشر مضاف عبر ::before من نسخ سابقة */
+.about-page .bullets li::before {
+  content: none !important;
+}
+
+/* شكّل دائرة النقطة بدون إظهار الرمز "•" كنص */
+.about-page .bullets .dot {
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: #eef4ff;
+  border: 1px solid rgba(58, 123, 213, 0.18);
+  color: #2f6bbd;
+  font-weight: 900;
+  line-height: 1;
+  font-size: 0; /* يخفي "•" كنص */
+}
+
+/* لو عندك SVG/أيقونة داخل .dot خلّيها تبقى مرئية */
+.about-page .bullets .dot svg {
+  width: 12px;
+  height: 12px;
+  font-size: 12px;
+}
+/* ===== UX/UI Typography & Readability Upgrade (About hero only) ===== */
+
+/* 1) قياس كتابة محسّن وتدرّج ألوان هادئ */
+.about-hero h1 {
+  font-size: clamp(36px, 5vw, 64px) !important;
+  line-height: 1.06;
+  letter-spacing: 0.1px;
+  margin-bottom: 12px;
+}
+
+.about-hero .lead {
+  max-width: 75ch !important; /* حرّر السطر شوي */
+  font-size: clamp(16px, 2vw, 18px);
+  line-height: 1.75;
+  color: #415066 !important; /* أغمق من muted لقراءة أفضل */
+  margin: 6px 0 18px !important;
+  font-feature-settings: "liga", "calt"; /* سلاسة حروف */
+}
+
+/* 2) بطاقة الـMission: توحيد تباين داخلي + مسافات مريحة */
+.mission-card {
+  padding: clamp(20px, 3.2vw, 24px) !important;
+}
+.mission-content {
+  max-width: 86ch;
+}
+.mission-content p {
+  margin: 0;
+  color: #223047; /* نص أساسي أدكن */
+  line-height: 1.78;
+}
+.mission-content b {
+  font-weight: 750; /* توكيد أنعم */
+  color: #0e1c34; /* يبرز بدون صراخ */
+}
+.mission-content b:first-child {
+  background: #e9f1ff;
+  color: #1e3a8a;
+  padding: 3px 8px;
+  border-radius: 8px;
+}
+
+/* 3) قائمة النقاط: شبكة أنظف + تباين واضح بين الرمز والنص */
+.about-page .bullets {
+  max-width: 75ch !important;
+  margin: 18px 0 6px !important;
+  gap: 12px !important;
+}
+.about-page .bullets li {
+  display: grid !important;
+  grid-template-columns: 20px 1fr !important;
+  align-items: start;
+  gap: 12px;
+  padding-left: 0 !important;
+  color: #2a3547; /* نص النقطة */
+  font-size: 15.8px;
+  line-height: 1.7;
+}
+.about-page .bullets .dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: #eef4ff;
+  border: 1px solid rgba(58, 123, 213, 0.18);
+  display: grid;
+  place-items: center;
+  font-size: 0; /* إخفاء “•” النصي */
+  box-shadow: 0 2px 5px rgba(37, 99, 235, 0.12);
+  position: relative;
+}
+.about-page .bullets .dot::after {
+  /* علامة صح خفيفة داخل الدائرة */
+  content: "";
+  width: 9px;
+  height: 9px;
+  border-right: 2px solid #2f6bbd;
+  border-bottom: 2px solid #2f6bbd;
+  transform: rotate(45deg);
+  margin-top: -2px;
+}
+
+/* 4) تنفّس عمومي حول كتلة الهيرو (فقط في الشاشات الكبيرة) */
+@media (min-width: 1100px) {
+  .about-hero {
+    padding-top: 72px !important;
+  }
+  .mission-card {
+    margin-top: 22px !important;
+  }
+}
+
+/* 5) تحسين تباين دقيق للروابط الغامقة داخل الفقرة التمهيدية */
+.about-hero .lead b {
+  color: #0f172a;
+  font-weight: 800;
+}
+
+/* 6) احترام الموبايل */
+@media (max-width: 640px) {
+  .about-hero .lead,
+  .mission-content,
+  .about-page .bullets {
+    max-width: 100% !important;
+  }
 }

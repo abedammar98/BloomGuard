@@ -19,10 +19,11 @@ import {
  *  API config (env-based)
  *  ======================== */
 const API_BASE = import.meta.env.VITE_API_BASE?.replace(/\/+$/, "");
-const API_KEY  = import.meta.env.VITE_API_KEY?.trim();
+const API_KEY = import.meta.env.VITE_API_KEY?.trim();
 if (!API_BASE || !API_KEY) {
-  // eslint-disable-next-line no-console
-  console.warn("[Graphs] Missing VITE_API_BASE or VITE_API_KEY — add them to .env");
+  console.warn(
+    "[Graphs] Missing VITE_API_BASE or VITE_API_KEY — add them to .env"
+  );
 }
 
 /** ========================
@@ -67,7 +68,8 @@ function zoneMessage(row) {
   const pretty = flagged
     .map((k) => (PRETTY[k] ? PRETTY[k] : k.replace(/_/g, " ")))
     .join(", ");
-  if (z === "green") return "Conditions look stable. Drivers within normal ranges.";
+  if (z === "green")
+    return "Conditions look stable. Drivers within normal ranges.";
   if (z === "yellow") {
     return flagged.length
       ? `Elevated bloom risk (yellow). Pay attention to: ${pretty}.`
@@ -109,7 +111,9 @@ function useAdvisory() {
             date: new Date(r.date),
             CDI: r.CDI == null ? null : Number(r.CDI),
             zone: String(r.zone || "").toLowerCase(),
-            flagged_drivers: Array.isArray(r.flagged_drivers) ? r.flagged_drivers : [],
+            flagged_drivers: Array.isArray(r.flagged_drivers)
+              ? r.flagged_drivers
+              : [],
             // NEW fields from updated notebook:
             PC1: r.PC1 == null ? null : Number(r.PC1),
             risk_prob: r.risk_prob == null ? null : Number(r.risk_prob),
@@ -145,7 +149,8 @@ function percentile(arr, p) {
     .sort((a, b) => a - b);
   if (!xs.length) return null;
   const idx = (p / 100) * (xs.length - 1);
-  const lo = Math.floor(idx), hi = Math.ceil(idx);
+  const lo = Math.floor(idx),
+    hi = Math.ceil(idx);
   if (lo === hi) return xs[lo];
   const w = idx - lo;
   return xs[lo] * (1 - w) + xs[hi] * w;
@@ -158,7 +163,9 @@ export default function Graphs() {
 
   // thresholds for CDI bands
   const { p80, p95 } = useMemo(() => {
-    const vals = (advisory || []).map((r) => r.CDI).filter((v) => typeof v === "number");
+    const vals = (advisory || [])
+      .map((r) => r.CDI)
+      .filter((v) => typeof v === "number");
     return { p80: percentile(vals, 80), p95: percentile(vals, 95) };
   }, [advisory]);
 
@@ -194,13 +201,17 @@ export default function Graphs() {
       dateLabel: r.dateLabel,
       value: r[selectedDriver] == null ? null : Number(r[selectedDriver]),
       zone: r.zone,
-      flagged: Array.isArray(r.flagged_drivers) && r.flagged_drivers.includes(selectedDriver),
+      flagged:
+        Array.isArray(r.flagged_drivers) &&
+        r.flagged_drivers.includes(selectedDriver),
     }));
   }, [chartData, selectedDriver]);
 
   // compute y-domain for selected driver (ignore nulls)
   const driverDomain = useMemo(() => {
-    const nums = driverSeries.map((d) => d.value).filter((v) => typeof v === "number" && !Number.isNaN(v));
+    const nums = driverSeries
+      .map((d) => d.value)
+      .filter((v) => typeof v === "number" && !Number.isNaN(v));
     if (!nums.length) return [0, 1];
     const min = Math.min(...nums);
     const max = Math.max(...nums);
@@ -330,7 +341,10 @@ export default function Graphs() {
       <div className="card">
         <div className="card-header" style={{ gap: 12, flexWrap: "wrap" }}>
           <h2>Drivers — click to view trend</h2>
-          <div className="chip-row" style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+          <div
+            className="chip-row"
+            style={{ display: "flex", flexWrap: "wrap", gap: 8 }}
+          >
             {DRIVER_COLS.map((k) => {
               const active = k === selectedDriver;
               return (
@@ -341,7 +355,9 @@ export default function Graphs() {
                   className="chip"
                   style={{
                     cursor: "pointer",
-                    border: active ? "2px solid rgba(255,255,255,.35)" : "1px solid rgba(0,0,0,0.06)",
+                    border: active
+                      ? "2px solid rgba(255,255,255,.35)"
+                      : "1px solid rgba(0,0,0,0.06)",
                     background: active ? "rgba(71,179,255,.22)" : undefined,
                     fontWeight: active ? 800 : 600,
                   }}
@@ -389,7 +405,10 @@ export default function Graphs() {
       <div className="card">
         <div className="card-header">
           <h2>{PRETTY.risk_prob}</h2>
-          <div className="kpis" style={{ gridTemplateColumns: "repeat(1, minmax(160px, 1fr))" }}>
+          <div
+            className="kpis"
+            style={{ gridTemplateColumns: "repeat(1, minmax(160px, 1fr))" }}
+          >
             <KPI
               title="Latest Risk Prob."
               value={latestRisk != null ? `${fmt(latestRisk, 2)}` : "—"}
@@ -405,7 +424,10 @@ export default function Graphs() {
             <div className="error">Error: {err}</div>
           ) : (
             <ResponsiveContainer width="100%" height={260}>
-              <LineChart data={riskSeries} margin={{ top: 10, right: 24, bottom: 10, left: 0 }}>
+              <LineChart
+                data={riskSeries}
+                margin={{ top: 10, right: 24, bottom: 10, left: 0 }}
+              >
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="dateLabel" minTickGap={24} />
                 <YAxis domain={[0, 1]} />

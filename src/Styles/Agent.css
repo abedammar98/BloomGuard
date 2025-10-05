@@ -397,3 +397,70 @@
     max-width: 95vw;
   }
 }
+/* === Dark polish: agent surfaces === */
+html[data-theme="dark"] .agent-page {
+  background: radial-gradient(
+      700px 300px at 10% -10%,
+      rgba(99, 182, 255, 0.1),
+      transparent 55%
+    ),
+    radial-gradient(
+      700px 300px at 90% -10%,
+      rgba(43, 209, 155, 0.1),
+      transparent 55%
+    ),
+    var(--bg);
+}
+
+html[data-theme="dark"] .suggestions-card,
+html[data-theme="dark"] .bubble {
+  background: var(--elev-1);
+  border-color: var(--line-strong);
+  color: var(--fg);
+}
+html[data-theme="dark"] .bubble.user {
+  background: #122742; /* أزرق داكن لطيف لرسائل المستخدم */
+  color: #e9f3ff;
+  border-color: rgba(99, 182, 255, 0.35);
+}
+html[data-theme="dark"] .bubble.error {
+  background: rgba(255, 77, 109, 0.12);
+  border-color: rgba(255, 77, 109, 0.35);
+}
+html[data-theme="dark"] .avatar {
+  background: #1e2c3f;
+  border-color: var(--line);
+  color: #cfe6ff;
+}
+html[data-theme="dark"] .icon-btn {
+  background: #101a29;
+}
+html[data-theme="dark"] .icon-btn:hover {
+  background: #132137;
+}
+
+html[data-theme="dark"] .input-dock {
+  background: var(--glass);
+  border-color: var(--line-strong);
+  backdrop-filter: blur(10px) saturate(120%);
+}
+html[data-theme="dark"] .agent-input {
+  background: var(--elev-1);
+  border-color: var(--line-strong);
+  color: var(--fg);
+}
+
+html[data-theme="dark"] .suggestion {
+  background: var(--elev-1);
+  border-color: var(--line);
+  color: var(--fg);
+}
+html[data-theme="dark"] .suggestion:hover {
+  background: var(--elev-2);
+  border-color: var(--line-strong);
+}
+html[data-theme="dark"] .toast {
+  background: rgba(255, 77, 109, 0.18);
+  color: #ffd7de;
+  border-color: rgba(255, 77, 109, 0.35);
+}

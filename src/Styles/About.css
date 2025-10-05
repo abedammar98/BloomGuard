@@ -468,3 +468,123 @@
     max-width: 100% !important;
   }
 }
+/* === Dark polish: about surfaces === */
+html[data-theme="dark"] .about-hero {
+  background: radial-gradient(
+      900px 380px at 0% -10%,
+      rgba(99, 182, 255, 0.12),
+      transparent 60%
+    ),
+    radial-gradient(
+      700px 300px at 100% -10%,
+      rgba(43, 209, 155, 0.1),
+      transparent 65%
+    );
+}
+html[data-theme="dark"] .section-title {
+  background: none;
+  color: #dbeafe;
+}
+html[data-theme="dark"] .mission-card {
+  background: linear-gradient(
+    180deg,
+    rgba(19, 36, 60, 0.96),
+    rgba(19, 36, 60, 0.92)
+  );
+  border-color: var(--line-strong);
+}
+html[data-theme="dark"] .mission-content p {
+  color: #d0e3f7;
+}
+html[data-theme="dark"] .team-wrap {
+  background: var(--elev-1);
+  border-color: var(--line-strong);
+}
+html[data-theme="dark"] .card {
+  background: linear-gradient(180deg, var(--elev-1), var(--elev-2));
+  border-color: var(--line);
+  box-shadow: var(--shadow);
+}
+html[data-theme="dark"] .links a {
+  background: #102036;
+  color: #87c8ff;
+  border-color: var(--line);
+}
+html[data-theme="dark"] .links a:hover {
+  background: #0f2a4a;
+  color: #b7dcff;
+  box-shadow: 0 10px 22px rgba(12, 24, 40, 0.6);
+}
+/* داكن: اجعل سطح البطاقة أغمق قليلًا ونصه أفتح */
+html[data-theme="dark"] .mission-card {
+  background: linear-gradient(
+    180deg,
+    rgba(19, 36, 60, 0.92),
+    rgba(19, 36, 60, 0.88)
+  );
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow);
+}
+
+html[data-theme="dark"] .mission-content p {
+  color: #d7e6f6; /* نص أوضح */
+}
+
+html[data-theme="dark"] .mission-content b {
+  color: #eaf3ff; /* إبراز بدون فقدان التباين */
+  font-weight: 800;
+}
+
+html[data-theme="dark"] .mission-content b:first-child {
+  background: rgba(99, 182, 255, 0.14); /* الشارة الأولى */
+  color: #bfe1ff;
+  border-radius: 8px;
+}
+
+html[data-theme="dark"] .mission-icon {
+  box-shadow: 0 10px 24px rgba(99, 182, 255, 0.28);
+}
+
+/* (اختياري) لو حسّيت النقاط تحت البطاقة باهتة */
+html[data-theme="dark"] .about-page .bullets li {
+  color: #cfe0f1;
+}
+html[data-theme="dark"] .about-page .bullets .dot {
+  background: #162a45;
+  border-color: rgba(99, 182, 255, 0.28);
+}
+/* ===== Fix: Mission card contrast in dark mode ===== */
+html[data-theme="dark"] .mission-card {
+  background: var(--elev-2); /* سطح أوضح */
+  border: 1px solid var(--line-strong); /* حد أقوى */
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.48),
+    /* ارتفاع خارجي */ inset 0 1px 0 rgba(255, 255, 255, 0.04); /* لمعان داخلي خفيف */
+}
+
+html[data-theme="dark"] .mission-content p {
+  color: #dbe7f7; /* نص مقروء */
+}
+
+html[data-theme="dark"] .mission-icon {
+  box-shadow: 0 12px 28px rgba(99, 182, 255, 0.28);
+}
+
+html[data-theme="dark"] .about-hero {
+  /* خط فصل أوضح أسفل البطاقة عند الخلفية الداكنة */
+  background: radial-gradient(
+      900px 380px at 0% -10%,
+      rgba(99, 182, 255, 0.12),
+      transparent 60%
+    ),
+    radial-gradient(
+      700px 300px at 100% -10%,
+      rgba(43, 209, 155, 0.1),
+      transparent 65%
+    ),
+    var(--bg);
+}
+
+/* (اختياري) هوامش أخفّ فوق وتحت لتبرز البطاقة */
+html[data-theme="dark"] .mission-card {
+  margin: 20px 0 16px;
+}

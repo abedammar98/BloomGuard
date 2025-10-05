@@ -8,6 +8,28 @@ export default function Navbar() {
   const menuRef = useRef(null);
   const btnRef = useRef(null);
 
+  // ثيم: التقط الحالة الحالية من الـhtml
+  const getTheme = () =>
+    document.documentElement.getAttribute("data-theme") === "dark"
+      ? "dark"
+      : "light";
+  const [theme, setTheme] = useState(getTheme());
+
+  function applyTheme(t) {
+    const html = document.documentElement;
+    html.setAttribute("data-theme", t);
+    html.style.colorScheme = t;
+    try {
+      localStorage.setItem("theme", t);
+    } catch (err) {
+      console.error("Failed to save theme:", err);
+    }
+    setTheme(t);
+  }
+  function toggleTheme() {
+    applyTheme(theme === "dark" ? "light" : "dark");
+  }
+
   // اغلاق القائمة عند تغيير المسار
   useEffect(() => {
     setOpen(false);
@@ -36,7 +58,6 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Skip link لتحسين الوصول */}
       <a href="#main" className="skip-link">
         Skip to content
       </a>
@@ -49,31 +70,44 @@ export default function Navbar() {
           <span className="logo-text">BloomGuard</span>
         </NavLink>
 
-        {/* زر الموبايل */}
-        <button
-          ref={btnRef}
-          className="nav-toggle"
-          aria-expanded={open}
-          aria-controls="primary-navigation"
-          onClick={() => setOpen((v) => !v)}
-        >
-          <span className="vh">Toggle navigation</span>☰
-        </button>
-
-        {/* روابط الديسكتوب + قائمة الموبايل */}
         <div
+          className="nav-links"
           id="primary-navigation"
           ref={menuRef}
-          className={`nav-links ${open ? "open" : ""}`}
           role="navigation"
         >
           <NavItem to="/graphs" label="📊 Graphs" />
           <NavItem to="/assistant" label="🤖 Assistant" />
           <NavItem to="/about" label="About" />
         </div>
+
+        {/* يمين الشريط: زر الثيم + زر الموبايل */}
+        <div className="nav-actions">
+          <button
+            type="button"
+            className="theme-btn"
+            onClick={toggleTheme}
+            aria-label={
+              theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
+            }
+            title={theme === "dark" ? "Light mode" : "Dark mode"}
+          >
+            {theme === "dark" ? "☀️" : "🌙"}
+          </button>
+
+          <button
+            ref={btnRef}
+            className="nav-toggle"
+            aria-expanded={open}
+            aria-controls="primary-navigation"
+            onClick={() => setOpen((v) => !v)}
+            title="Toggle navigation"
+          >
+            <span className="vh">Toggle navigation</span>☰
+          </button>
+        </div>
       </nav>
 
-      {/* طبقة تغطية لإغلاق القائمة عند الضغط خارجها على الموبايل */}
       {open && (
         <button
           className="nav-overlay"
@@ -90,7 +124,6 @@ function NavItem({ to, label }) {
     <NavLink
       to={to}
       className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}
-      // تحسين الوصول عبر العنوان
       aria-current={({ isActive }) => (isActive ? "page" : undefined)}
     >
       {label}

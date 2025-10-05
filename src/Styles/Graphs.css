@@ -5,7 +5,7 @@
   --card-bg: var(--card);
   --text: var(--fg);
   --muted: var(--muted);
-  --line: rgba(255,255,255,.08);
+  --line: rgba(255, 255, 255, 0.08);
   --shadow: var(--shadow);
   color: var(--text);
 }
@@ -18,8 +18,8 @@
   margin: 0 0 12px 0;
   font-size: 24px;
   font-weight: 800;
-  color: #ffffff;                 /* stay visible on dark header */
-  text-shadow: 0 1px 2px rgba(0,0,0,.25);
+  color: #ffffff; /* stay visible on dark header */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
 }
 
 /* KPIs */
@@ -49,7 +49,7 @@
   padding: 4px 10px;
   border-radius: 999px;
   font-size: 14px;
-  background: rgba(71,179,255,.16); /* soft blue pill */
+  background: rgba(71, 179, 255, 0.16); /* soft blue pill */
   color: var(--fg);
 }
 
@@ -81,7 +81,7 @@
   border-radius: 999px;
   font-size: 12px;
   margin-left: 8px;
-  border: 1px solid rgba(0,0,0,0.06);
+  border: 1px solid rgba(0, 0, 0, 0.06);
   background: #bff7cf; /* default demo chip bg; your bands are drawn in the chart */
 }
 
@@ -90,7 +90,8 @@
   padding: 8px 10px 8px;
   height: 360px;
 }
-.loading, .error {
+.loading,
+.error {
   padding: 18px 16px 24px;
   color: var(--muted);
 }
@@ -99,7 +100,7 @@
 .hover-panel {
   border-top: 1px solid var(--line);
   padding: 12px 16px 16px;
-  background: rgba(255,255,255,.03);   /* subtle translucent layer */
+  background: rgba(255, 255, 255, 0.03); /* subtle translucent layer */
   border-bottom-left-radius: 14px;
   border-bottom-right-radius: 14px;
 }
@@ -110,8 +111,14 @@
   margin-bottom: 8px;
   gap: 12px;
 }
-.hover-left { display: flex; gap: 14px; align-items: center; }
-.hover-date { margin-right: 12px; }
+.hover-left {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+.hover-date {
+  margin-right: 12px;
+}
 
 .zone-badge {
   color: #00121e;
@@ -119,8 +126,8 @@
   border-radius: 999px;
   font-weight: 700;
   font-size: 12px;
-  border: 1px solid rgba(0,0,0,0.06);
-  background: rgba(255,255,255,.9);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  background: rgba(255, 255, 255, 0.9);
 }
 
 /* Driver chips row */
@@ -131,8 +138,12 @@
   font-size: 14px;
   margin: 6px 0 8px;
 }
-.driver-chip { white-space: nowrap; }
-.driver-name { margin-right: 4px; }
+.driver-chip {
+  white-space: nowrap;
+}
+.driver-name {
+  margin-right: 4px;
+}
 
 /* Message box */
 .hover-msg {
@@ -150,6 +161,52 @@
   border-radius: 10px !important;
   border: 1px solid var(--line) !important;
   box-shadow: var(--shadow) !important;
-  background: rgba(10,19,32,.96) !important;
+  background: rgba(10, 19, 32, 0.96) !important;
   color: var(--fg) !important;
+}
+/* === Dark polish: graphs cards & KPIs === */
+html[data-theme="dark"] .graphs-header h1 {
+  color: #dbeafe;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+html[data-theme="dark"] .kpi {
+  background: var(--elev-1);
+  border-color: var(--line-strong);
+}
+html[data-theme="dark"] .kpi-value.badge {
+  background: rgba(99, 182, 255, 0.16);
+  color: var(--fg);
+}
+html[data-theme="dark"] .card {
+  background: var(--elev-1);
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow);
+}
+html[data-theme="dark"] .card-header {
+  border-bottom-color: var(--line-strong);
+}
+
+html[data-theme="dark"] .chip-row .chip {
+  background: #bff7cf1a; /* تلميح أخضر شفاف */
+  color: #cfe6ff;
+  border-color: var(--line);
+}
+
+html[data-theme="dark"] .hover-panel {
+  background: rgba(255, 255, 255, 0.03);
+  border-top-color: var(--line-strong);
+}
+html[data-theme="dark"] .hover-msg {
+  background: var(--elev-1);
+  border-color: var(--line);
+  color: var(--fg);
+}
+
+/* Recharts tooltip already dark; just stronger border */
+html[data-theme="dark"] .recharts-default-tooltip {
+  border-color: var(--line-strong) !important;
+}
+html[data-theme="dark"] .chip-row .chip {
+  border-color: var(--line-strong);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset;
 }

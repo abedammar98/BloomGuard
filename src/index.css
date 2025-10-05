@@ -137,3 +137,93 @@ a:hover {
   outline: none;
   box-shadow: var(--ring);
 }
+/* ==== Dark Theme ==== */
+html[data-theme="dark"] {
+  /* ألوان أساسية للداكن */
+  --bg: #0b1624; /* خلفية رئيسية */
+  --fg: #e8f6ff; /* نص */
+  --muted: #9fb3c8; /* نص ثانوي */
+  --card: #0f1b2b; /* بطاقات */
+  --line: rgba(255, 255, 255, 0.08);
+  --shadow: 0 10px 28px rgba(2, 6, 23, 0.35);
+
+  /* يمكن تبريد التدرّج قليلاً في الداكن */
+  --primary: #47b3ff;
+  --primary-2: #6cc0ff;
+  --secondary: #2ccf98;
+
+  /* حلقات التركيز */
+  --ring-color: rgba(71, 179, 255, 0.35);
+}
+
+/* تحسين انتقال خفيف عند التبديل */
+html,
+body,
+.page,
+.agent-page,
+.graphs-page,
+.about-page,
+.card,
+.navbar {
+  transition: background-color 0.25s ease, color 0.25s ease,
+    border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* اجعل النظام يحكم افتراضيًا عندما لا يوجد تخزين محلي */
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme]) {
+    color-scheme: dark;
+  }
+}
+/* ==== Dark Theme (Pro) ==== */
+html[data-theme="dark"] {
+  /* Core palette */
+  --bg: #0b1523; /* خلفية عميقة بدون سواد تام */
+  --fg: #e6f0ff; /* نص أساسي عالي التباين */
+  --muted: #9fb1c5; /* نص ثانوي */
+  --card: #0f1c2d; /* سطح أساسي للبطاقات */
+  --line: rgba(230, 240, 255, 0.08); /* حدود خفيفة */
+  --line-strong: rgba(230, 240, 255, 0.14); /* حدود أقوى قليلاً */
+
+  /* Accents (باردة وهادئة للدارك) */
+  --primary: #63b6ff;
+  --primary-2: #86c8ff;
+  --secondary: #2bd19b;
+
+  /* Elevations / ظلال */
+  --shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+  --elev-1: #0f1c2d; /* surface-1 */
+  --elev-2: #13243a; /* surface-2 */
+  --elev-3: #182b45; /* surface-3 */
+
+  /* Glass / خلفيات نصف شفافة */
+  --glass: rgba(17, 28, 44, 0.72);
+  --glass-strong: rgba(17, 28, 44, 0.86);
+
+  /* Focus ring أكثر وضوحًا */
+  --ring-color: rgba(99, 182, 255, 0.45);
+  --ring: 0 0 0 3px var(--ring-color);
+
+  /* مساعدة المتصفح على اختيار عناصر النظام */
+  color-scheme: dark;
+}
+
+/* انتقالات رقيقة للألوان بين الثيمين */
+html,
+body,
+.page,
+.agent-page,
+.graphs-page,
+.about-page,
+.card,
+.navbar,
+.btn,
+.kpi {
+  transition: background-color 0.25s ease, color 0.25s ease,
+    border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Scrollbar غامق أنظف */
+html[data-theme="dark"] *::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #203047, #2e4662);
+}

@@ -514,7 +514,16 @@ function KPI({ title, value, badge = false }) {
 
 function Chip({ color, children }) {
   return (
-    <span className="chip" style={{ background: color }}>
+    <span
+      className="chip"
+      style={{
+        background: color,
+        color: "#06131f", // نص داكن يقرأ على البادج الفاتحة
+        fontWeight: 800,
+        padding: "4px 12px",
+        border: "1px solid var(--line)", // حافة خفيفة تحسّن التباين
+      }}
+    >
       {children}
     </span>
   );

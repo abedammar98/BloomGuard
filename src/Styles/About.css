@@ -1,4 +1,4 @@
-/* ─────────── Root & Variables ─────────── */
+/* ─────────── Root & page scope ─────────── */
 .about-page {
   --text: var(--fg);
   --muted: var(--muted);
@@ -10,32 +10,19 @@
   --accent: var(--primary);
   --accent-2: var(--primary-2);
 
-  --space-1: 8px;
-  --space-2: 12px;
-  --space-3: 16px;
-  --space-4: 20px;
-  --space-5: 28px;
   color: var(--text);
 }
 
-/* ─────────── Layout Container ─────────── */
-.container {
+/* احصر الـcontainer داخل صفحة About فقط */
+.about-page .container {
   width: min(1100px, 100%);
   margin: 0 auto;
   padding-inline: clamp(16px, 3.2vw, 24px);
 }
 
-/* كتلة نص لقراءة مثالية */
-.prose {
-  max-width: 70ch;
-  line-height: 1.7;
-  font-size: clamp(15.5px, 1.9vw, 17px);
-  color: var(--text);
-}
-
-/* ─────────── Section Header ─────────── */
+/* ─────────── Section Header / Hero ─────────── */
 .section-header {
-  margin-bottom: var(--space-4);
+  margin-bottom: 20px;
 }
 .eyebrow {
   display: inline-flex;
@@ -49,25 +36,16 @@
   padding: 6px 10px;
   border-radius: 999px;
 }
-.eyebrow svg {
-  width: 14px;
-  height: 14px;
-}
 .section-title {
   margin: 10px 0 6px;
   font-weight: 900;
   letter-spacing: 0.2px;
-  font-size: clamp(28px, 4vw, 42px);
-  color: #0f172a;
+  font-size: clamp(36px, 5vw, 64px);
+  background: linear-gradient(90deg, #0f172a, #1e3a8a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-wrap: balance;
 }
-.section-kicker {
-  margin: 0;
-  color: var(--muted);
-  max-width: 68ch;
-  font-size: 15px;
-}
-
-/* ─────────── Hero (ألوان هادئة + تدرج خلفية) ─────────── */
 .about-hero {
   position: relative;
   isolation: isolate;
@@ -84,32 +62,17 @@
     );
   border-radius: 0 0 30px 30px;
 }
-
-/* عنوان الهيرو */
-.about-hero h1 {
-  font-size: clamp(32px, 4.8vw, 56px);
-  line-height: 1.08;
-  font-weight: 900;
-  letter-spacing: 0.2px;
-  margin-bottom: 8px;
-  background: linear-gradient(90deg, #0f172a, #1e3a8a);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-wrap: balance;
-}
-
-/* الفقرة التمهيدية */
-.about-hero .lead {
-  max-width: 70ch;
-  font-size: clamp(15.5px, 1.9vw, 17px);
+.lead {
+  max-width: 75ch;
+  font-size: clamp(16px, 2vw, 18px);
   line-height: 1.75;
-  color: #4b5563;
-  margin: 10px 0 14px;
+  color: #415066;
+  margin: 6px 0 18px;
 }
 
 /* ─────────── Mission Card ─────────── */
 .mission-card {
-  margin: var(--space-4) 0 var(--space-3);
+  margin: 20px 0 16px;
   background: linear-gradient(
     180deg,
     rgba(255, 255, 255, 0.96),
@@ -118,7 +81,7 @@
   border: 1px solid var(--line);
   border-radius: 18px;
   box-shadow: var(--shadow);
-  padding: clamp(18px, 3vw, 22px);
+  padding: clamp(20px, 3.2vw, 24px);
   display: grid;
   grid-template-columns: 48px 1fr;
   gap: 14px;
@@ -133,47 +96,51 @@
   color: #fff;
   box-shadow: 0 10px 24px rgba(58, 123, 213, 0.25);
 }
-.mission-content b {
-  font-weight: 700;
-  color: #0f172a;
+.mission-content {
+  max-width: 86ch;
 }
-.mission-content b:first-child {
-  background: #eef4ff;
-  color: #204f98;
-  padding: 2px 6px;
-  border-radius: 8px;
+.mission-content p {
+  margin: 0;
+  color: #223047;
+  line-height: 1.78;
+}
+.mission-content b {
+  font-weight: 750;
+  color: #0e1c34;
 }
 
 /* ─────────── Bullets ─────────── */
 .bullets {
-  margin: var(--space-4) 0 var(--space-1);
-  padding: 0;
   list-style: none;
+  padding: 0;
   display: grid;
-  gap: 10px;
-  max-width: 68ch;
+  gap: 12px;
+  margin: 18px 0 6px;
+  max-width: 75ch;
 }
 .bullets li {
-  position: relative;
-  padding-left: 28px;
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  gap: 12px;
+  align-items: start;
+  color: #2a3547;
   line-height: 1.7;
-  color: var(--fg);
 }
 .bullets li::before {
-  content: "";
-  position: absolute;
-  left: 8px;
-  top: 0.9em;
-  transform: translateY(-50%);
-  width: 10px;
-  height: 10px;
+  content: none !important;
+}
+.bullets .dot {
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
-  background: #3b82f6;
-  border: 1px solid rgba(37, 99, 235, 0.25);
-  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
+  background: #eef4ff;
+  border: 1px solid rgba(58, 123, 213, 0.18);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 2px 5px rgba(37, 99, 235, 0.12);
 }
 
-/* ─────────── Team Section ─────────── */
+/* ─────────── Team ─────────── */
 .team-section {
   margin: 28px 0 36px;
 }
@@ -238,7 +205,6 @@
   border-color: rgba(58, 123, 213, 0.22);
 }
 
-/* أفاتار الفريق (fix نهائي) */
 .avatar {
   width: 116px;
   height: 116px;
@@ -299,10 +265,6 @@
   color: #204f98;
   box-shadow: 0 10px 22px rgba(58, 123, 213, 0.16);
 }
-.links a:focus-visible {
-  outline: 2px solid var(--ring);
-  outline-offset: 2px;
-}
 
 .credit {
   margin-top: 16px;
@@ -311,164 +273,7 @@
   font-size: 13px;
 }
 
-/* تقليل الحركة */
-@media (prefers-reduced-motion: reduce) {
-  .card,
-  .links a {
-    transition: none !important;
-  }
-}
-/* ===== Fix bullets duplication & layout (About only) ===== */
-.about-page .bullets {
-  max-width: 72ch;
-  margin: 16px 0 8px;
-  padding: 0;
-  list-style: none; /* لا نستخدم نقط المتصفح */
-  display: grid;
-  gap: 10px;
-}
-
-.about-page .bullets li {
-  display: grid; /* عمود للنقطة + عمود للنص */
-  grid-template-columns: 22px 1fr;
-  gap: 10px;
-  align-items: start;
-  color: var(--fg);
-  padding-left: 0; /* ألغِ الحشو القديم */
-}
-
-/* ألغِ أي مؤشر مضاف عبر ::before من نسخ سابقة */
-.about-page .bullets li::before {
-  content: none !important;
-}
-
-/* شكّل دائرة النقطة بدون إظهار الرمز "•" كنص */
-.about-page .bullets .dot {
-  width: 22px;
-  height: 22px;
-  border-radius: 999px;
-  display: grid;
-  place-items: center;
-  background: #eef4ff;
-  border: 1px solid rgba(58, 123, 213, 0.18);
-  color: #2f6bbd;
-  font-weight: 900;
-  line-height: 1;
-  font-size: 0; /* يخفي "•" كنص */
-}
-
-/* لو عندك SVG/أيقونة داخل .dot خلّيها تبقى مرئية */
-.about-page .bullets .dot svg {
-  width: 12px;
-  height: 12px;
-  font-size: 12px;
-}
-/* ===== UX/UI Typography & Readability Upgrade (About hero only) ===== */
-
-/* 1) قياس كتابة محسّن وتدرّج ألوان هادئ */
-.about-hero h1 {
-  font-size: clamp(36px, 5vw, 64px) !important;
-  line-height: 1.06;
-  letter-spacing: 0.1px;
-  margin-bottom: 12px;
-}
-
-.about-hero .lead {
-  max-width: 75ch !important; /* حرّر السطر شوي */
-  font-size: clamp(16px, 2vw, 18px);
-  line-height: 1.75;
-  color: #415066 !important; /* أغمق من muted لقراءة أفضل */
-  margin: 6px 0 18px !important;
-  font-feature-settings: "liga", "calt"; /* سلاسة حروف */
-}
-
-/* 2) بطاقة الـMission: توحيد تباين داخلي + مسافات مريحة */
-.mission-card {
-  padding: clamp(20px, 3.2vw, 24px) !important;
-}
-.mission-content {
-  max-width: 86ch;
-}
-.mission-content p {
-  margin: 0;
-  color: #223047; /* نص أساسي أدكن */
-  line-height: 1.78;
-}
-.mission-content b {
-  font-weight: 750; /* توكيد أنعم */
-  color: #0e1c34; /* يبرز بدون صراخ */
-}
-.mission-content b:first-child {
-  background: #e9f1ff;
-  color: #1e3a8a;
-  padding: 3px 8px;
-  border-radius: 8px;
-}
-
-/* 3) قائمة النقاط: شبكة أنظف + تباين واضح بين الرمز والنص */
-.about-page .bullets {
-  max-width: 75ch !important;
-  margin: 18px 0 6px !important;
-  gap: 12px !important;
-}
-.about-page .bullets li {
-  display: grid !important;
-  grid-template-columns: 20px 1fr !important;
-  align-items: start;
-  gap: 12px;
-  padding-left: 0 !important;
-  color: #2a3547; /* نص النقطة */
-  font-size: 15.8px;
-  line-height: 1.7;
-}
-.about-page .bullets .dot {
-  width: 20px;
-  height: 20px;
-  border-radius: 999px;
-  background: #eef4ff;
-  border: 1px solid rgba(58, 123, 213, 0.18);
-  display: grid;
-  place-items: center;
-  font-size: 0; /* إخفاء “•” النصي */
-  box-shadow: 0 2px 5px rgba(37, 99, 235, 0.12);
-  position: relative;
-}
-.about-page .bullets .dot::after {
-  /* علامة صح خفيفة داخل الدائرة */
-  content: "";
-  width: 9px;
-  height: 9px;
-  border-right: 2px solid #2f6bbd;
-  border-bottom: 2px solid #2f6bbd;
-  transform: rotate(45deg);
-  margin-top: -2px;
-}
-
-/* 4) تنفّس عمومي حول كتلة الهيرو (فقط في الشاشات الكبيرة) */
-@media (min-width: 1100px) {
-  .about-hero {
-    padding-top: 72px !important;
-  }
-  .mission-card {
-    margin-top: 22px !important;
-  }
-}
-
-/* 5) تحسين تباين دقيق للروابط الغامقة داخل الفقرة التمهيدية */
-.about-hero .lead b {
-  color: #0f172a;
-  font-weight: 800;
-}
-
-/* 6) احترام الموبايل */
-@media (max-width: 640px) {
-  .about-hero .lead,
-  .mission-content,
-  .about-page .bullets {
-    max-width: 100% !important;
-  }
-}
-/* === Dark polish: about surfaces === */
+/* ─────────── Dark Mode polish ─────────── */
 html[data-theme="dark"] .about-hero {
   background: radial-gradient(
       900px 380px at 0% -10%,
@@ -483,108 +288,60 @@ html[data-theme="dark"] .about-hero {
 }
 html[data-theme="dark"] .section-title {
   background: none;
+  -webkit-background-clip: initial;
+  -webkit-text-fill-color: currentColor;
   color: #dbeafe;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
 }
-html[data-theme="dark"] .mission-card {
-  background: linear-gradient(
-    180deg,
-    rgba(19, 36, 60, 0.96),
-    rgba(19, 36, 60, 0.92)
-  );
-  border-color: var(--line-strong);
-}
-html[data-theme="dark"] .mission-content p {
+html[data-theme="dark"] .lead {
   color: #d0e3f7;
 }
+
+html[data-theme="dark"] .mission-card {
+  background: var(--elev-2);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.48),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+html[data-theme="dark"] .mission-content p {
+  color: #dbe7f7;
+}
+html[data-theme="dark"] .mission-content b {
+  color: #eef6ff;
+}
+
 html[data-theme="dark"] .team-wrap {
   background: var(--elev-1);
-  border-color: var(--line-strong);
+  border-color: rgba(255, 255, 255, 0.16);
 }
 html[data-theme="dark"] .card {
   background: linear-gradient(180deg, var(--elev-1), var(--elev-2));
-  border-color: var(--line);
+  border-color: rgba(255, 255, 255, 0.12);
   box-shadow: var(--shadow);
 }
 html[data-theme="dark"] .links a {
   background: #102036;
   color: #87c8ff;
-  border-color: var(--line);
+  border-color: rgba(255, 255, 255, 0.12);
 }
 html[data-theme="dark"] .links a:hover {
   background: #0f2a4a;
   color: #b7dcff;
   box-shadow: 0 10px 22px rgba(12, 24, 40, 0.6);
 }
-/* داكن: اجعل سطح البطاقة أغمق قليلًا ونصه أفتح */
-html[data-theme="dark"] .mission-card {
-  background: linear-gradient(
-    180deg,
-    rgba(19, 36, 60, 0.92),
-    rgba(19, 36, 60, 0.88)
-  );
-  border-color: var(--line-strong);
-  box-shadow: var(--shadow);
-}
 
-html[data-theme="dark"] .mission-content p {
-  color: #d7e6f6; /* نص أوضح */
-}
-
-html[data-theme="dark"] .mission-content b {
-  color: #eaf3ff; /* إبراز بدون فقدان التباين */
-  font-weight: 800;
-}
-
-html[data-theme="dark"] .mission-content b:first-child {
-  background: rgba(99, 182, 255, 0.14); /* الشارة الأولى */
-  color: #bfe1ff;
-  border-radius: 8px;
-}
-
-html[data-theme="dark"] .mission-icon {
-  box-shadow: 0 10px 24px rgba(99, 182, 255, 0.28);
-}
-
-/* (اختياري) لو حسّيت النقاط تحت البطاقة باهتة */
-html[data-theme="dark"] .about-page .bullets li {
+html[data-theme="dark"] .bullets li {
   color: #cfe0f1;
 }
-html[data-theme="dark"] .about-page .bullets .dot {
+html[data-theme="dark"] .bullets .dot {
   background: #162a45;
   border-color: rgba(99, 182, 255, 0.28);
 }
-/* ===== Fix: Mission card contrast in dark mode ===== */
-html[data-theme="dark"] .mission-card {
-  background: var(--elev-2); /* سطح أوضح */
-  border: 1px solid var(--line-strong); /* حد أقوى */
-  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.48),
-    /* ارتفاع خارجي */ inset 0 1px 0 rgba(255, 255, 255, 0.04); /* لمعان داخلي خفيف */
-}
 
-html[data-theme="dark"] .mission-content p {
-  color: #dbe7f7; /* نص مقروء */
-}
-
-html[data-theme="dark"] .mission-icon {
-  box-shadow: 0 12px 28px rgba(99, 182, 255, 0.28);
-}
-
-html[data-theme="dark"] .about-hero {
-  /* خط فصل أوضح أسفل البطاقة عند الخلفية الداكنة */
-  background: radial-gradient(
-      900px 380px at 0% -10%,
-      rgba(99, 182, 255, 0.12),
-      transparent 60%
-    ),
-    radial-gradient(
-      700px 300px at 100% -10%,
-      rgba(43, 209, 155, 0.1),
-      transparent 65%
-    ),
-    var(--bg);
-}
-
-/* (اختياري) هوامش أخفّ فوق وتحت لتبرز البطاقة */
-html[data-theme="dark"] .mission-card {
-  margin: 20px 0 16px;
+/* تقليل الحركة */
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .links a {
+    transition: none !important;
+  }
 }

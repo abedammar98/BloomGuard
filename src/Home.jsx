@@ -2,14 +2,14 @@ import "./Styles/Home.css";
 import Navbar from "./Components/Navbar";
 import { Link } from "react-router-dom";
 
-function Home() {
+export default function Home() {
   return (
     <div className="page">
       <Navbar />
 
       <main id="main" aria-labelledby="hero-title">
         <section className="hero" aria-label="BloomGuard overview">
-          <div className="hero-inner">
+          <div className="container hero-inner">
             {/* ── النص ── */}
             <div className="hero-copy">
               <span className="hero-kicker">Environmental Intelligence</span>
@@ -45,7 +45,11 @@ function Home() {
                 >
                   🤖 Open Assistant
                 </Link>
-                <Link className="btn" to="/about" aria-label="About BloomGuard">
+                <Link
+                  className="btn btn-ghost"
+                  to="/about"
+                  aria-label="About BloomGuard"
+                >
                   About
                 </Link>
               </div>
@@ -55,29 +59,36 @@ function Home() {
                   <div className="ico" aria-hidden>
                     📚
                   </div>
-                  <div className="num">10+ yrs</div>
-                  <div className="label">Historical data</div>
+                  <div>
+                    <div className="num">10+ yrs</div>
+                    <div className="label">Historical data</div>
+                  </div>
                 </div>
+
                 <div className="stat">
                   <div className="ico" aria-hidden>
                     📡
                   </div>
-                  <div className="num">25+</div>
-                  <div className="label">Monitoring stations</div>
+                  <div>
+                    <div className="num">25+</div>
+                    <div className="label">Monitoring stations</div>
+                  </div>
                 </div>
+
                 <div className="stat">
                   <div className="ico" aria-hidden>
                     🔎
                   </div>
-                  <div className="num">120+</div>
-                  <div className="label">Cited papers in RAG</div>
+                  <div>
+                    <div className="num">120+</div>
+                    <div className="label">Cited papers in RAG</div>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* ── الجانب المرئي الهادىء ── */}
+            {/* ── الجانب المرئي ── */}
             <div className="hero-visual" aria-hidden="true">
-              {/* SVG ناعم يعبّر عن الماء/الموج + ورقة */}
               <svg
                 viewBox="0 0 540 340"
                 xmlns="http://www.w3.org/2000/svg"
@@ -104,7 +115,6 @@ function Home() {
                   fill="url(#g1)"
                   opacity="0.12"
                 />
-
                 <ellipse
                   cx="270"
                   cy="220"
@@ -121,7 +131,6 @@ function Home() {
                   rx="4"
                   fill="#b48a7a"
                 />
-
                 <path
                   d="M270 165 C300 150 320 145 335 155 C320 160 300 170 270 165 Z"
                   fill="url(#g2)"
@@ -138,5 +147,3 @@ function Home() {
     </div>
   );
 }
-
-export default Home;
